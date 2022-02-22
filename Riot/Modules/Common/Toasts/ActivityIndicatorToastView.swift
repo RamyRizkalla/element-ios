@@ -29,6 +29,7 @@ class ActivityIndicatorToastView: UIView, Themable {
     private let stackView: UIStackView = {
         let stack = UIStackView()
         stack.axis = .horizontal
+        stack.alignment = .center
         stack.spacing = 5
         return stack
     }()
@@ -85,7 +86,8 @@ class ActivityIndicatorToastView: UIView, Themable {
     }
     
     func update(theme: Theme) {
-        backgroundColor = UIColor.white
+        backgroundColor = theme.colors.background
         label.font = theme.fonts.subheadline
+        label.textColor = theme.colors.primaryContent
     }
 }
