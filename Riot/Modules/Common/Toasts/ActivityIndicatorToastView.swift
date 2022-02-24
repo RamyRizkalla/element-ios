@@ -19,16 +19,22 @@ import UIKit
 import DesignKit
 
 class ActivityIndicatorToastView: UIView, Themable {
+    private struct ShadowStyle {
+        let offset: CGSize
+        let radius: CGFloat
+        let opacity: Float
+    }
+    
     private struct Constants {
         static let padding = UIEdgeInsets(top: 10, left: 12, bottom: 10, right: 12)
-        static let shadowOffset = CGSize(width: 0, height: 4)
-        static let shadowRadius = CGFloat(12)
-        static let shadowOpacity = Float(0.1)
+        static let lightShadow = ShadowStyle(offset: .init(width: 0, height: 4), radius: 12, opacity: 0.1)
+        static let darkShadow = ShadowStyle(offset: .init(width: 0, height: 4), radius: 4, opacity: 0.2)
     }
     
     private let stackView: UIStackView = {
         let stack = UIStackView()
         stack.axis = .horizontal
+        stack.alignment = .center
         stack.spacing = 5
         return stack
     }()
@@ -54,7 +60,6 @@ class ActivityIndicatorToastView: UIView, Themable {
     }
 
     private func setup(text: String) {
-        setupLayer()
         setupStackView()
         stackView.addArrangedSubview(activityIndicator)
         stackView.addArrangedSubview(label)
@@ -72,20 +77,20 @@ class ActivityIndicatorToastView: UIView, Themable {
         ])
     }
     
-    private func setupLayer() {
-        layer.shadowColor = UIColor.black.cgColor
-        layer.shadowOffset = Constants.shadowOffset
-        layer.shadowRadius = Constants.shadowRadius
-        layer.shadowOpacity = Constants.shadowOpacity
-    }
-    
     override func layoutSubviews() {
         super.layoutSubviews()
         layer.cornerRadius = layer.frame.height / 2
     }
     
     func update(theme: Theme) {
-        backgroundColor = UIColor.white
+        backgroundColor = theme.colors.background
         label.font = theme.fonts.subheadline
+        label.textColor = theme.colors.primaryContent
+        
+        let shadowStyle = theme.identifier == ThemeIdentifier.dark.rawValue ? Constants.darkShadow : Constants.lightShadow
+        layer.shadowColor = UIColor.black.cgColor
+        layer.shadowOffset = shadowStyle.offset
+        layer.shadowRadius = shadowStyle.radius
+        layer.shadowOpacity = shadowStyle.opacity
     }
 }
