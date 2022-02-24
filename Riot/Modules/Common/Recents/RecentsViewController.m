@@ -1282,8 +1282,7 @@ NSString *const RecentsViewControllerDataReadyNotification = @"RecentsViewContro
                                                                  MXRoom *room = [self.mainSession roomWithRoomId:currentRoomId];
                                                                  if (room)
                                                                  {
-                                                                     [self startActivityIndicator];
-                                                                     
+                                                                     [self startActivityIndicatorWithLabel:[VectorL10n roomParticipantsLeaveProcessing]];
                                                                      // cancel pending uploads/downloads
                                                                      // they are useless by now
                                                                      [MXMediaManager cancelDownloadsInCacheFolder:room.roomId];
@@ -1298,6 +1297,7 @@ NSString *const RecentsViewControllerDataReadyNotification = @"RecentsViewContro
                                                                          {
                                                                              typeof(self) self = weakSelf;
                                                                              [self stopActivityIndicator];
+                                                                             [self.userIndicatorPresenter presentSuccessWithLabel:[VectorL10n roomParticipantsLeaveSuccess]];
                                                                              // Force table refresh
                                                                              [self cancelEditionMode:YES];
                                                                          }
@@ -2412,20 +2412,28 @@ NSString *const RecentsViewControllerDataReadyNotification = @"RecentsViewContro
 #pragma mark - Activity Indicator
 
 - (BOOL)providesCustomActivityIndicator {
-    return self.activityPresenter != nil;
+    return self.userIndicatorPresenter != nil;
+}
+
+- (void)startActivityIndicatorWithLabel:(NSString *)label {
+    if (self.userIndicatorPresenter) {
+        [self.userIndicatorPresenter presentActivityIndicatorWithLabel:label];
+    } else {
+        [super startActivityIndicator];
+    }
 }
 
 - (void)startActivityIndicator {
-    if (self.activityPresenter) {
-        [self.activityPresenter presentActivityIndicator];
+    if (self.userIndicatorPresenter) {
+        [self.userIndicatorPresenter presentActivityIndicator];
     } else {
         [super startActivityIndicator];
     }
 }
 
 - (void)stopActivityIndicator {
-    if (self.activityPresenter) {
-        [self.activityPresenter removeCurrentActivityIndicatorWithAnimated:YES completion:nil];
+    if (self.userIndicatorPresenter) {
+        [self.userIndicatorPresenter removeCurrentActivityIndicatorWithAnimated:YES completion:nil];
     } else {
         [super stopActivityIndicator];
     }
