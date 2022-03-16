@@ -26,14 +26,16 @@
 
 #define TABBAR_HOME_INDEX         0
 #define TABBAR_FAVOURITES_INDEX   1
-#define TABBAR_PEOPLE_INDEX       2
-#define TABBAR_ROOMS_INDEX        3
-#define TABBAR_GROUPS_INDEX       4
-#define TABBAR_COUNT              5
+#define TABBAR_BOOKING_INDEX      2
+#define TABBAR_PEOPLE_INDEX       3
+#define TABBAR_ROOMS_INDEX        4
+#define TABBAR_GROUPS_INDEX       5
+#define TABBAR_COUNT              6
 
 typedef NS_ENUM(NSUInteger, MasterTabBarIndex) {
     MasterTabBarIndexHome = TABBAR_HOME_INDEX,
     MasterTabBarIndexFavourites = TABBAR_FAVOURITES_INDEX,
+    MasterTabBarIndexBooking = TABBAR_BOOKING_INDEX,
     MasterTabBarIndexPeople = TABBAR_PEOPLE_INDEX,
     MasterTabBarIndexRooms = TABBAR_ROOMS_INDEX,
     MasterTabBarIndexGroups = TABBAR_GROUPS_INDEX

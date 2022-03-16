@@ -14,6 +14,7 @@
 // limitations under the License.
 //
 
+import ASTemplateConfiguration
 import UIKit
 import PushKit
 
@@ -71,7 +72,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Call legacy AppDelegate
         self.legacyAppDelegate.window = window
         self.legacyAppDelegate.application(application, didFinishLaunchingWithOptions: launchOptions)
-        
+        setupAviasales()
         return true
     }
     
@@ -121,5 +122,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
         self.legacyAppDelegate.application(application, didReceiveRemoteNotification: userInfo, fetchCompletionHandler: completionHandler)
+    }
+
+    private func setupAviasales() {
+        guard let window = window else { return }
+
+        AviasalesViewControllersFactory.shared.setup(window: window, config: { () -> Config in
+            var colorParams = ColorParams()
+            colorParams.mainColor = "9C6CBE"
+            colorParams.actionColor = "CE0755"
+
+            var config = Config()
+            config.partnerMarker = "11501"
+            config.apiToken = "31b7acf7452acdb78c6a25aa1cd2ea49"
+            config.carRentalLink = "https://c117.travelpayouts.com/click?shmarker=226237&promo_id=3555&source_type=customlink&type=click&custom_url=https%3A%2F%2Fwww.discovercarhire.com%2F"
+            config.colorParams = colorParams
+            return config
+        }())
     }
 }

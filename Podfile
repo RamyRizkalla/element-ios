@@ -1,7 +1,7 @@
 source 'https://cdn.cocoapods.org/'
 
 # Uncomment this line to define a global platform for your project
-platform :ios, '12.1'
+platform :ios, '13.0'
 
 # Use frameworks to allow usage of pods written in Swift
 use_frameworks!
@@ -13,9 +13,9 @@ use_frameworks!
 # - `{ :specHash => {sdk spec hash}` to depend on specific pod options (:git => …, :podspec => …) for MatrixSDK repo. Used by Fastfile during CI
 #
 # Warning: our internal tooling depends on the name of this variable name, so be sure not to change it
-$matrixSDKVersion = '= 0.22.6'
+#$matrixSDKVersion = '= 0.22.5'
 # $matrixSDKVersion = :local
-# $matrixSDKVersion = { :branch => 'develop'}
+$matrixSDKVersion = { :branch => 'develop'}
 # $matrixSDKVersion = { :specHash => { git: 'https://git.io/fork123', branch: 'fix' } }
 
 ########################################
@@ -59,6 +59,21 @@ def import_SwiftUI_pods
     pod 'Introspect', '~> 0.1'
 end
 
+def aviasales_kit_dependencies
+    pod 'AviasalesKit', podspec: 'https://ios.aviasales.ru/cocoapods/AviasalesKit_6.6.1.podspec'
+
+    # forked AviasalesKit dependencies
+    pod "CollectionSwipableCellExtension", git: 'https://github.com/KosyanMedia/CollectionSwipableCellExtension.git', commit: 'd3d7c9ee8721562174cbd2c89f88b1d05bbc5fc0'
+    pod 'Neon', git: 'https://github.com/KosyanMedia/Neon.git', commit: '3770df30ee072a728becb8f1f6b7c29276a3dab4'
+
+    # suppress warnings
+    pod 'TTTAttributedLabel', inhibit_warnings: true
+    pod 'BZipCompression', inhibit_warnings: true
+    pod 'PromiseKit', inhibit_warnings: true
+    pod 'SnowplowTracker', inhibit_warnings: true
+end
+
+
 abstract_target 'RiotPods' do
 
   pod 'GBDeviceInfo', '~> 6.6.0'
@@ -82,8 +97,8 @@ abstract_target 'RiotPods' do
   target "Riot" do
     import_MatrixSDK
     import_MatrixKit_pods
-
     import_SwiftUI_pods
+    aviasales_kit_dependencies
 
     pod 'DGCollectionViewLeftAlignFlowLayout', '~> 1.0.4'
     pod 'UICollectionViewRightAlignedLayout', '~> 0.0.3'
@@ -97,7 +112,7 @@ abstract_target 'RiotPods' do
     pod 'DSWaveformImage', '~> 6.1.1'
     pod 'ffmpeg-kit-ios-audio', '4.5.1'
     
-    pod 'FLEX', '~> 4.5.0', :configurations => ['Debug'], :inhibit_warnings => true
+#    pod 'FLEX', '~> 4.5.0', :configurations => ['Debug'], :inhibit_warnings => true
 
     target 'RiotTests' do
       inherit! :search_paths
@@ -111,6 +126,7 @@ abstract_target 'RiotPods' do
 
   target "RiotSwiftUI" do
     import_SwiftUI_pods
+    aviasales_kit_dependencies
   end 
 
   target "RiotSwiftUITests" do
@@ -148,6 +164,8 @@ post_install do |installer|
 
       # Stop Xcode 12 complaining about old IPHONEOS_DEPLOYMENT_TARGET from pods
       config.build_settings.delete 'IPHONEOS_DEPLOYMENT_TARGET'
+
+      config.build_settings['BUILD_LIBRARY_FOR_DISTRIBUTION'] = 'YES'
 
       # Disable nullability checks
       config.build_settings['WARNING_CFLAGS'] ||= ['$(inherited)','-Wno-nullability-completeness']

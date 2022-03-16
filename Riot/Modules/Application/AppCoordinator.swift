@@ -21,7 +21,7 @@ import CommonKit
 import UIKit
 
 #if DEBUG
-import FLEX
+//import FLEX
 #endif
 
 /// The AppCoordinator is responsible of screen navigation and data injection at root application level. It decides
@@ -204,7 +204,7 @@ final class AppCoordinator: NSObject, AppCoordinatorType {
     
     @objc private func showFlexDebugger() {
         #if DEBUG
-        FLEXManager.shared.showExplorer()
+//        FLEXManager.shared.showExplorer()
         #endif
     }
     

@@ -4,6 +4,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -145,7 +146,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4qY-qn-l6L" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="942" y="-2049"/>
+            <point key="canvasLocation" x="1174" y="-1904"/>
         </scene>
         <!--Unified Search View Controller-->
         <scene sceneID="ijO-nb-yi4">
@@ -167,6 +168,25 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="G2g-bd-dSj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="476" y="-3899"/>
+        </scene>
+        <!--Item-->
+        <scene sceneID="Vhi-xc-9Mf">
+            <objects>
+                <viewController storyboardIdentifier="BookingViewController" id="xdf-pi-rc9" customClass="BookingViewController" customModule="Riot" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="tbt-Uq-iJY"/>
+                        <viewControllerLayoutGuide type="bottom" id="lXx-xf-GY9"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="MN5-Wl-Hu6">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Item" image="action_location" id="8mr-W2-vPY"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="DZj-jW-PAS" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="447" y="-3144"/>
         </scene>
         <!--Home View Controller-->
         <scene sceneID="SZi-Ac-WJp">
@@ -193,7 +213,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pEk-LO-Ij0" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="942" y="-2818"/>
+            <point key="canvasLocation" x="1222" y="-2712"/>
         </scene>
         <!--Master Tab Bar Controller-->
         <scene sceneID="iBe-Y5-gBt">
@@ -231,6 +251,7 @@
                         <segue destination="IGB-jr-yFz" kind="relationship" relationship="viewControllers" id="CeF-yL-aO0"/>
                         <segue destination="HPQ-zg-lZR" kind="relationship" relationship="viewControllers" id="y12-eg-vhO"/>
                         <segue destination="SLx-Wj-p7E" kind="relationship" relationship="viewControllers" id="MLn-VT-30W"/>
+                        <segue destination="xdf-pi-rc9" kind="relationship" relationship="viewControllers" id="Pzq-RI-SNs"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="k1S-FF-3Zu" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -495,11 +516,30 @@
             </objects>
             <point key="canvasLocation" x="-153" y="-419"/>
         </scene>
+        <!--View Controller-->
+        <scene sceneID="f9Z-C5-lgg">
+            <objects>
+                <viewController id="2Jr-m6-jqH" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="DHf-TJ-sT0"/>
+                        <viewControllerLayoutGuide type="bottom" id="FnR-c4-ZDg"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="IEf-ZQ-q9Y">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="qzj-ab-fcR" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1222" y="-3292"/>
+        </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="Tfl-tq-LQp"/>
+        <segue reference="mhb-l9-pM3"/>
     </inferredMetricsTieBreakers>
     <resources>
+        <image name="action_location" width="24" height="24"/>
         <image name="launch_screen_logo" width="240" height="240"/>
         <image name="search_icon" width="24" height="24"/>
         <image name="settings_icon" width="24" height="24"/>
@@ -510,6 +550,9 @@
         <image name="tab_rooms" width="24" height="24"/>
         <systemColor name="groupTableViewBackgroundColor">
             <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
     </resources>
 </document>

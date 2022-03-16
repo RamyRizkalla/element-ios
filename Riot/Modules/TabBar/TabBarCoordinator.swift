@@ -244,7 +244,16 @@ final class TabBarCoordinator: NSObject, TabBarCoordinatorType {
         favouritesViewController.indicatorPresenter = UserIndicatorPresenterWrapper(presenter: indicatorPresenter)
         return favouritesViewController
     }
-    
+
+    private func createBookingViewController() -> BookingViewController {
+        let storyboard = UIStoryboard(name: "Main", bundle: .main)
+        let bookingViewController: BookingViewController! = storyboard.instantiateViewController(withIdentifier: "BookingViewController") as? BookingViewController
+        bookingViewController.tabBarItem.tag = Int(TABBAR_BOOKING_INDEX)
+//        favouritesViewController.access ibilityLabel = VectorL10n.titleFavourites
+//        bookingViewController.indicatorPresenter = UserIndicatorPresenterWrapper(presenter: indicatorPresenter)
+        return bookingViewController
+    }
+
     private func createPeopleViewController() -> PeopleViewController {
         let peopleViewController: PeopleViewController = PeopleViewController.instantiate()
         peopleViewController.tabBarItem.tag = Int(TABBAR_PEOPLE_INDEX)
@@ -324,6 +333,9 @@ final class TabBarCoordinator: NSObject, TabBarCoordinatorType {
             let favouritesViewController = self.createFavouritesViewController()
             viewControllers.append(favouritesViewController)
         }
+
+        let bookingViewCtrl = self.createBookingViewController()
+        viewControllers.append(bookingViewCtrl)
         
         if RiotSettings.shared.homeScreenShowPeopleTab {
             let peopleViewController = self.createPeopleViewController()
